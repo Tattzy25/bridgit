@@ -18,5 +18,8 @@
     "lib": "@/lib",
     "hooks": "@/hooks"
   },
-  "registries": {}
+  "registries": {
+    "@heroicons-animated": "https://www.heroicons-animated.com/r/{name}.json",
+    "@animbits": "https://animbits.dev/r/{name}.json"
+  }
 }

@@ -4,6 +4,10 @@ import { Calculator, Calendar, CreditCard, Settings, Smile, User } from "lucide-
 import { SearchIcon } from "lucide-react"
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group"
 import { Kbd } from "@/components/ui/kbd"
+import { TextWordCarousel } from "@/components/word-carousel"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { BorderBeam } from "@/components/border-beam"
 import {
   CommandDialog,
   CommandEmpty,
@@ -32,6 +36,8 @@ function KbdInputGroup({ onOpen }: { onOpen: () => void }) {
   )
 }
 
+
+
 export default function Home() {
   const [open, setOpen] = React.useState(false)
 
@@ -48,7 +54,12 @@ export default function Home() {
 
   return (
     <div className="flex justify-center items-center min-h-screen">
+      {/* Temporarily hidden original search bar */}
+      {/* <KbdInputGroup onOpen={() => setOpen(true)} /> */}
+
+      {/* Clean search bar */}
       <KbdInputGroup onOpen={() => setOpen(true)} />
+
       <CommandDialog open={open} onOpenChange={setOpen}>
         <CommandInput placeholder="Type a command or search..." />
         <CommandList>
