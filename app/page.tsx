@@ -1,103 +1,17 @@
 "use client"
-import * as React from "react"
-import { Calculator, Calendar, CreditCard, Settings, Smile, User } from "lucide-react"
-import { SearchIcon } from "lucide-react"
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group"
-import { Kbd } from "@/components/ui/kbd"
-import { TextWordCarousel } from "@/components/word-carousel"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { BorderBeam } from "@/components/border-beam"
-import {
-  CommandDialog,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
-  CommandShortcut,
-} from "@/components/ui/command"
-
-function KbdInputGroup({ onOpen }: { onOpen: () => void }) {
-  return (
-    <div className="flex w-full max-w-xs flex-col gap-6">
-      <InputGroup>
-        <InputGroupInput placeholder="Search..." onClick={onOpen} />
-        <InputGroupAddon>
-          <SearchIcon />
-        </InputGroupAddon>
-        <InputGroupAddon align="inline-end">
-          <Kbd>⌘</Kbd>
-          <Kbd>K</Kbd>
-        </InputGroupAddon>
-      </InputGroup>
-    </div>
-  )
-}
-
-
+import { HeroSearch } from "@/components/hero-search"
+import { UserSearchBar } from "@/components/user-search-bar"
 
 export default function Home() {
-  const [open, setOpen] = React.useState(false)
-
-  React.useEffect(() => {
-    const down = (e: KeyboardEvent) => {
-      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault()
-        setOpen((open) => !open)
-      }
-    }
-    document.addEventListener("keydown", down)
-    return () => document.removeEventListener("keydown", down)
-  }, [])
-
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      {/* Temporarily hidden original search bar */}
-      {/* <KbdInputGroup onOpen={() => setOpen(true)} /> */}
+    <div className="flex flex-col justify-center items-center min-h-screen gap-8 p-8">
+      {/* Hero search bar - visual only, no command menu */}
+      <HeroSearch />
 
-      {/* Clean search bar */}
-      <KbdInputGroup onOpen={() => setOpen(true)} />
-
-      <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Type a command or search..." />
-        <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Suggestions">
-            <CommandItem>
-              <Calendar />
-              <span>Calendar</span>
-            </CommandItem>
-            <CommandItem>
-              <Smile />
-              <span>Search Emoji</span>
-            </CommandItem>
-            <CommandItem>
-              <Calculator />
-              <span>Calculator</span>
-            </CommandItem>
-          </CommandGroup>
-          <CommandSeparator />
-          <CommandGroup heading="Settings">
-            <CommandItem>
-              <User />
-              <span>Profile</span>
-              <CommandShortcut>⌘P</CommandShortcut>
-            </CommandItem>
-            <CommandItem>
-              <CreditCard />
-              <span>Billing</span>
-              <CommandShortcut>⌘B</CommandShortcut>
-            </CommandItem>
-            <CommandItem>
-              <Settings />
-              <span>Settings</span>
-              <CommandShortcut>⌘S</CommandShortcut>
-            </CommandItem>
-          </CommandGroup>
-        </CommandList>
-      </CommandDialog>
+      {/* User search bar - hidden for now */}
+      <div style={{ display: 'none' }}>
+        <UserSearchBar />
+      </div>
     </div>
   )
 }
